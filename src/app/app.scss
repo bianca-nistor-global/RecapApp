@@ -1,0 +1,54 @@
+.main-container {
+  height: 100vh;
+  display: flex;
+
+  mat-sidenav {
+    width: 220px;
+    padding: 1rem;
+    font-size: 1rem;
+
+    mat-toolbar {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    button[mat-button] {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      text-align: left;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      gap: 0.5rem;
+    }
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    mat-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      font-size: 1.1rem;
+      font-weight: 500;
+
+      span {
+        margin-left: 1rem;
+      }
+    }
+
+    app-home,
+    app-bosses,
+    app-characters,
+    app-dungeons,
+    app-items,
+    app-monsters {
+      padding: 2rem;
+    }
+  }
+}

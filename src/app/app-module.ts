@@ -3,14 +3,41 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { Characters } from './characters/characters';
+import { Monsters } from './monsters/monsters';
+import { Bosses } from './bosses/bosses';
+import { Dungeons } from './dungeons/dungeons';
+import { Items } from './items/items';
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
+import { Home } from './home/home';
 
 @NgModule({
   declarations: [
-    App
+    App,
+    Characters,
+    Monsters,
+    Bosses,
+    Dungeons,
+    Items,
+    Home
   ],
   imports: [
+    MatProgressBarModule,
+    MatCardModule,
+    MatChipsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

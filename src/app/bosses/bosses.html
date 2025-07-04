@@ -1,0 +1,15 @@
+<h2> Bosses </h2>
+@for(boss of bosses; track boss.name){
+    <mat-card>
+        <mat-card-header>{{boss.name}}</mat-card-header>
+        <mat-card-content>
+            <p>{{boss.desctiption}}</p>
+        </mat-card-content>
+
+        <mat-card-footer>
+            <mat-chip-set >
+                    <mat-chip class="category">{{boss.category}}</mat-chip>
+            </mat-chip-set>
+        </mat-card-footer>
+    </mat-card>
+}

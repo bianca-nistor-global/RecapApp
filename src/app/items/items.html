@@ -1,0 +1,16 @@
+<h2>Items</h2>
+
+@for(x of items; track x.name){
+    <mat-card>
+        <mat-card-header>{{x.name}}</mat-card-header>
+        <mat-card-content>
+            <p>{{x.desctiption}}</p>
+        </mat-card-content>
+
+        <mat-card-footer>
+            <mat-chip-set>
+                <mat-chip class="category">{{x.category}}</mat-chip>
+            </mat-chip-set>
+        </mat-card-footer>
+    </mat-card>
+}
