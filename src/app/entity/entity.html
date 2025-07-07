@@ -1,0 +1,16 @@
+<h2>{{title}}</h2>
+
+@for(entry of entity; track entry.name){
+    <mat-card>
+        <mat-card-header>{{entry.name}}</mat-card-header>
+        <mat-card-content>
+            <p>{{entry.desctiption}}</p>
+        </mat-card-content>
+
+        <mat-card-footer>
+            <mat-chip-set>
+                <mat-chip class="category" [ngClass]="entry.category.toLowerCase()">{{entry.category}}</mat-chip>
+            </mat-chip-set>
+        </mat-card-footer>
+    </mat-card>
+}

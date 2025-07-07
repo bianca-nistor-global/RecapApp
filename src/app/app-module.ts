@@ -17,6 +17,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import { Home } from './home/home';
+import { Entity } from './entity/entity';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { Home } from './home/home';
     Bosses,
     Dungeons,
     Items,
-    Home
+    Home,
+    Entity
   ],
   imports: [
     MatProgressBarModule,
