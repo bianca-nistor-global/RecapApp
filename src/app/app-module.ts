@@ -16,8 +16,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Home } from './home/home';
 import { Entity } from './entity/entity';
+import { Profile } from './profile/profile';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,8 @@ import { Entity } from './entity/entity';
     Dungeons,
     Items,
     Home,
-    Entity
+    Entity,
+    Profile
   ],
   imports: [
     MatProgressBarModule,
@@ -39,7 +44,11 @@ import { Entity } from './entity/entity';
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    BrowserModule,
+    MatFormFieldModule, 
+    MatInputModule  
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

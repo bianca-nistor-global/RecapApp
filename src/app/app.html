@@ -1,6 +1,7 @@
 <mat-sidenav-container class="main-container">
   <mat-sidenav  #sidenav mode="over" opened full>
     <mat-toolbar> Categories </mat-toolbar>
+    <button mat-button (click)="setComponent('profile')">Profile</button> 
     <button mat-button (click)="setComponent('home')">🏠 Home</button> 
     <button mat-button (click)="setComponent('bosses')">👹 Bosses</button>
     <button mat-button (click)="setComponent('characters')">🧝 Characters</button>
@@ -18,6 +19,7 @@
     </mat-toolbar>
 
 
+    <app-profile *ngIf="selectedComponent === 'profile'"></app-profile>
     <app-home *ngIf="selectedComponent === 'home'"></app-home>
     <app-bosses *ngIf="selectedComponent === 'bosses'"></app-bosses>
     <app-characters *ngIf="selectedComponent === 'characters'"></app-characters>
