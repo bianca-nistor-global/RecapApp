@@ -1,6 +1,6 @@
 <div class="profile-container">
 <div calss="profile-card" *ngIf="!editing">
-  <ng-container *ngIf="profile; else noProfile">
+  <ng-container *ngIf="hasProfile; else noProfile">
     <h2>{{ profile.username }}</h2>
     <img
       *ngIf="profile.imageUrl"

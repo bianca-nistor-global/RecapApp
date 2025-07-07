@@ -9,6 +9,7 @@ import { PROFILES } from './profiles';
 })
 export class Profile implements OnInit{
   editing: boolean = false;
+  hasProfile: boolean = false;
   profile: ProfileModel = {
     id: 0,
     firstName: '',
@@ -22,6 +23,7 @@ export class Profile implements OnInit{
   ngOnInit(): void {
     if (PROFILES.length > 0) {
       this.profile = PROFILES[0];
+      this.hasProfile = true;
     } else {
       this.profile = {id: 0,
     firstName: '',
