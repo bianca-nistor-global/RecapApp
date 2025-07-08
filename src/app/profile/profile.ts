@@ -6,7 +6,7 @@ import { PROFILES } from './profiles';
   selector: 'app-profile',
   standalone: false,
   templateUrl: './profile.html',
-  styleUrl: './profile.scss'
+  styleUrl: './profile.scss',
 })
 export class Profile implements OnInit {
   editing: boolean = false;
@@ -20,11 +20,10 @@ export class Profile implements OnInit {
     email: '',
     username: '',
     phone: '',
-    imageUrl: ''
+    imageUrl: '',
   };
 
   ngOnInit(): void {
-    // Load existing profile if available
     if (PROFILES.length > 0) {
       this.profile = PROFILES[0];
       this.hasProfile = true;
@@ -34,11 +33,15 @@ export class Profile implements OnInit {
   setFormMode(mode: 'reactive' | 'template'): void {
     this.formMode = mode;
     this.editing = true;
+    localStorage.setItem('lastFormMode', mode);
   }
 
   startEditing(): void {
     this.editing = true;
-    this.formMode = 'template'; // Default to template if no mode was chosen
+    const lastMode = localStorage.getItem('lastFormMode') as
+      | 'template'
+      | 'reactive'
+    this.formMode = lastMode;
   }
 
   cancelEditing(): void {
@@ -56,10 +59,13 @@ export class Profile implements OnInit {
     this.editing = false;
     this.hasProfile = true;
     this.formMode = 'none';
+
+    alert('Profile saved successfully!');
   }
 
   onProfileSaved(updatedProfile: ProfileModel): void {
     this.profile = updatedProfile;
+    console.log('Profile saved:', this.profile);
     this.saveProfile();
   }
 }

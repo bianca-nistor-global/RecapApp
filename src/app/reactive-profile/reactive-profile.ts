@@ -1,5 +1,11 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { ProfileModel } from '../models/profile.model';
 
@@ -7,24 +13,31 @@ import { ProfileModel } from '../models/profile.model';
   selector: 'app-reactive-profile',
   templateUrl: './reactive-profile.html',
   standalone: false,
-  styleUrls: ['./reactive-profile.scss']
+  styleUrls: ['./reactive-profile.scss'],
 })
 export class ReactiveProfile implements OnInit {
   profileForm!: FormGroup;
+  @Input() profile!: ProfileModel;
   @Output() save = new EventEmitter<ProfileModel>();
   @Output() cancel = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, this.phoneValidator]],
-      imageUrl: ['', [this.urlValidator]],
-      username: ['', [Validators.required, Validators.minLength(4), this.alphanumericValidator]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      username: ['', Validators.required],
+      email: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]
+      ],
+      phone: ['', Validators.pattern('^\\+?[0-9]{8,}$')],
+      imageUrl: ['']
     });
+  }
+  ngOnInit(): void {
+    if (this.profile) {
+      this.profileForm.patchValue(this.profile);
+    }
   }
 
   phoneValidator(control: AbstractControl): ValidationErrors | null {
@@ -53,7 +66,7 @@ export class ReactiveProfile implements OnInit {
 
   onSubmit() {
     if (this.profileForm.valid) {
-      console.log('Submitted Profile:', this.profileForm.value);
+      this.save.emit(this.profileForm.value);
     } else {
       this.profileForm.markAllAsTouched();
     }

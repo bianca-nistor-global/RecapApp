@@ -1,5 +1,5 @@
 <div class="profile-container">
-  <!-- 🌟 Choose form type -->
+
   <div class="form-mode-buttons" *ngIf="!editing && !hasProfile">
     <p>Choose how you want to create your profile:</p>
     <button mat-raised-button color="primary" (click)="setFormMode('template')">
@@ -34,7 +34,6 @@
     <button mat-raised-button (click)="startEditing()">Create Profile</button>
   </ng-template>
 
-  <!-- ✏️ Template-driven Form -->
   <div *ngIf="editing && formMode === 'template'">
     <app-template-profile
       [profile]="profile"
@@ -43,9 +42,9 @@
     ></app-template-profile>
   </div>
 
-  <!-- ⚛️ Reactive Form (Component) -->
   <div *ngIf="editing && formMode === 'reactive'">
     <app-reactive-profile
+      [profile]="profile"
       (cancel)="cancelEditing()"
       (save)="onProfileSaved($event)"
     >
