@@ -1,5 +1,13 @@
-import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  NgModule,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -13,15 +21,25 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatCardModule} from '@angular/material/card';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Home } from './home/home';
 import { Entity } from './entity/entity';
 import { Profile } from './profile/profile';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ReactiveProfile } from './reactive-profile/reactive-profile';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TemplateProfile } from './template-profile/template-profile';
 
 @NgModule({
   declarations: [
@@ -33,28 +51,32 @@ import { FormsModule } from '@angular/forms';
     Items,
     Home,
     Entity,
-    Profile
+    Profile,
+    ReactiveProfile,
+    TemplateProfile,
   ],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+
     MatProgressBarModule,
     MatCardModule,
     MatChipsModule,
-    BrowserModule,
-    AppRoutingModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule,
-    BrowserModule,
-    MatFormFieldModule, 
-    MatInputModule  
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
   ],
-  bootstrap: [App]
+  bootstrap: [App],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,6 +1,17 @@
 <div class="profile-container">
-<div calss="profile-card" *ngIf="!editing">
-  <ng-container *ngIf="hasProfile; else noProfile">
+  <!-- 🌟 Choose form type -->
+  <div class="form-mode-buttons" *ngIf="!editing && !hasProfile">
+    <p>Choose how you want to create your profile:</p>
+    <button mat-raised-button color="primary" (click)="setFormMode('template')">
+      <mat-icon>format_align_left</mat-icon> Template Form
+    </button>
+    <button mat-raised-button color="accent" (click)="setFormMode('reactive')">
+      <mat-icon>code</mat-icon> Reactive Form
+    </button>
+  </div>
+
+  <!-- 🧾 Existing Profile Display -->
+  <div class="profile-card" *ngIf="!editing && hasProfile">
     <h2>{{ profile.username }}</h2>
     <img
       *ngIf="profile.imageUrl"
@@ -15,99 +26,29 @@
       <mat-icon>edit</mat-icon>
       Edit Profile
     </button>
-  </ng-container>
+  </div>
 
+  <!-- ❌ No Profile Fallback -->
   <ng-template #noProfile>
     <p>No profile created yet.</p>
-    <button (click)="startEditing()">Create Profile</button>
+    <button mat-raised-button (click)="startEditing()">Create Profile</button>
   </ng-template>
-</div>
 
-<div *ngIf="editing">
-  <form #form="ngForm" (ngSubmit)="saveProfile()">
-    <mat-form-field>
-      <mat-label> First Name:</mat-label>
-      <input
-        matInput
-        type="text"
-        name="firstName"
-        [(ngModel)]="profile.firstName"
-        required
-      />
-    </mat-form-field>
+  <!-- ✏️ Template-driven Form -->
+  <div *ngIf="editing && formMode === 'template'">
+    <app-template-profile
+      [profile]="profile"
+      (cancel)="cancelEditing()"
+      (save)="onProfileSaved($event)"
+    ></app-template-profile>
+  </div>
 
-    <mat-form-field>
-      <mat-label> Last Name: </mat-label>
-      <input
-        matInput
-        type="text"
-        name="lastName"
-        [(ngModel)]="profile.lastName"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label> Username: </mat-label>
-      <input
-        matInput
-        type="text"
-        name="username"
-        [(ngModel)]="profile.username"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label> Email: </mat-label>
-      <input
-        matInput
-        type="email"
-        name="email"
-        [(ngModel)]="profile.email"
-        required
-        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-        #emailInput="ngModel"
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label> Phone: </mat-label>
-      <input
-        matInput
-        type="text"
-        name="phone"
-        [(ngModel)]="profile.phone"
-        pattern="^\+?[0-9]{8,}$"
-        #phoneInput="ngModel"
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label> Profile Image URL: </mat-label>
-      <input
-        matInput
-        type="url"
-        name="imageUrl"
-        [(ngModel)]="profile.imageUrl"
-      />
-    </mat-form-field>
-
-    <button mat-raised-button type="submit" [disabled]="form.invalid">
-      <mat-icon>check_circle</mat-icon>
-      Save
-    </button>
-    <div *ngIf="emailInput.invalid && emailInput.touched">
-      <small *ngIf="emailInput.errors?.['required']">Email is required.</small>
-      <small *ngIf="emailInput.errors?.['pattern']"
-        >Please enter a valid email address.</small
-      >
-    </div>
-    <div *ngIf="phoneInput.invalid">
-      <h3 *ngIf="phoneInput.errors?.['pattern']">
-        Phone number must be at least 8 digits long and can start with a '+'.
-      </h3>
-    </div>
-  </form>
-</div>
+  <!-- ⚛️ Reactive Form (Component) -->
+  <div *ngIf="editing && formMode === 'reactive'">
+    <app-reactive-profile
+      (cancel)="cancelEditing()"
+      (save)="onProfileSaved($event)"
+    >
+    </app-reactive-profile>
+  </div>
 </div>

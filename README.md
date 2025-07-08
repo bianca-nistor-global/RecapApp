@@ -75,6 +75,13 @@ Using these hooks correctly helps manage component behavior, memory, and data fl
 
 By combining these layout tools, developers can rapidly build polished UIs without writing complex CSS from scratch.
 
+### Reactive Forms
+
+Key concepts of reactive forms:
+- FormGroup: a group of form controls, aggregates the values of each control into a single object
+- FormControl: a single input field, manages the value, validation status and user interactions of an input field.
+- FormBuilder: provides convenient methods for creating instances of FormGroup and FormControl
+- Validators: functions for sync and async validation of form controls
 
 ## Screenshots
 
