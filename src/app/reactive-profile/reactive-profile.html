@@ -5,70 +5,83 @@
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" />
-        <mat-error
-          *ngIf="f['firstName'].touched && f['firstName'].errors?.['required']"
-          >Required</mat-error
-        >
-        <mat-error *ngIf="f['firstName'].errors?.['minlength']"
-          >Min 2 characters</mat-error
-        >
+        <div class="errors">
+          <mat-error *ngIf="f['firstName'].hasError('required')"
+            >First name is required</mat-error
+          >
+          <mat-error *ngIf="f['firstName'].hasError('minlength')"
+            >Min 2 characters</mat-error
+          >
+        </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
-        <mat-error
-          *ngIf="f['lastName'].touched && f['lastName'].errors?.['required']"
-          >Required</mat-error
-        >
-        <mat-error *ngIf="f['lastName'].errors?.['minlength']"
-          >Min 2 characters</mat-error
-        >
+        <div class="errors">
+          <mat-error *ngIf="f['lastName'].hasError('required')"
+            >Last name is required</mat-error
+          >
+          <mat-error *ngIf="f['lastName'].hasError('minlength')"
+            >Min 2 characters</mat-error
+          >
+        </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
-        <mat-error *ngIf="f['email'].touched && f['email'].errors?.['required']"
-          >Required</mat-error
-        >
-        <mat-error *ngIf="f['email'].errors?.['email']"
-          >Invalid email</mat-error
-        >
+        <div class="errors">
+          <mat-error
+            *ngIf="f['email'].touched && f['email'].errors?.['required']"
+            >Required</mat-error
+          >
+          <mat-error *ngIf="f['email'].hasError('email')">
+            Invalid email format
+          </mat-error>
+          <mat-error *ngIf="f['email'].hasError('emailTaken')">
+            Email already in use
+          </mat-error>
+        </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Phone</mat-label>
         <input matInput formControlName="phone" />
-        <mat-error *ngIf="f['phone'].touched && f['phone'].errors?.['required']"
-          >Required</mat-error
-        >
-        <mat-error *ngIf="f['phone'].errors?.['invalidPhone']"
-          >Must be 10–15 digits</mat-error
-        >
+        <div class="errors">
+          <mat-error *ngIf="f['phone'].hasError('required')"
+            >Phone is required</mat-error
+          >
+          <mat-error *ngIf="f['phone'].hasError('pattern')"
+            >Invalid phone format</mat-error
+          >
+        </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Image URL</mat-label>
         <input matInput formControlName="imageUrl" />
-        <mat-error *ngIf="f['imageUrl'].errors?.['invalidUrl']"
-          >Invalid URL</mat-error
-        >
+        <div class="errors">
+          <mat-error *ngIf="f['imageUrl'].errors?.['invalidUrl']"
+            >Invalid URL</mat-error
+          >
+        </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
-        <mat-error
-          *ngIf="f['username'].touched && f['username'].errors?.['required']"
-          >Required</mat-error
-        >
-        <mat-error *ngIf="f['username'].errors?.['minlength']"
-          >Min 4 characters</mat-error
-        >
-        <mat-error *ngIf="f['username'].errors?.['invalidUsername']"
-          >Alphanumeric only</mat-error
-        >
+        <div class="errors">
+          <mat-error *ngIf="f['username'].hasError('required')"
+            >Username is required</mat-error
+          >
+          <mat-error *ngIf="f['username'].hasError('minlength')"
+            >Min 3 characters</mat-error
+          >
+          <mat-error *ngIf="f['username'].hasError('pattern')"
+            >Only letters, numbers, and underscores allowed</mat-error
+          >
+        </div>
       </mat-form-field>
     </mat-card-content>
 

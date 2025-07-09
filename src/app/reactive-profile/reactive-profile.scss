@@ -16,7 +16,6 @@ form {
   align-items: stretch;
   gap: 2rem;
 }
-
 mat-form-field {
   width: 100%;
   font-size: 1.4rem;
@@ -76,7 +75,10 @@ button[mat-raised-button] {
 button[mat-button] {
   color: #cccccc;
 }
-
+.errors{
+  margin-top: 1rem;
+  font-size: 1rem;
+}
 small,
 h3 {
   color: #ff6b6b;

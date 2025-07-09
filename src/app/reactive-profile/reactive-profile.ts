@@ -5,9 +5,13 @@ import {
   Validators,
   AbstractControl,
   ValidationErrors,
+  AsyncValidator,
+  AsyncValidatorFn,
 } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { ProfileModel } from '../models/profile.model';
+import { debounce, debounceTime, delay, first, of, switchMap } from 'rxjs';
+import { FakeBackend } from '../fake-backend';
 
 @Component({
   selector: 'app-reactive-profile',
@@ -21,17 +25,17 @@ export class ReactiveProfile implements OnInit {
   @Output() save = new EventEmitter<ProfileModel>();
   @Output() cancel = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private backend: FakeBackend) {
     this.profileForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      email: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]
+      firstName: ['', Validators.required, Validators.minLength(3)],
+      lastName: ['', Validators.required ,Validators.minLength(3)],
+      username: ['',Validators.required, this.alphanumericValidator],
+      email: ['',
+        [Validators.required, Validators.email],
+        [this.emailNotTakenValidator()], 
       ],
-      phone: ['', Validators.pattern('^\\+?[0-9]{8,}$')],
-      imageUrl: ['']
+      phone: ['', this.phoneValidator],
+      imageUrl: ['', this.urlValidator]
     });
   }
   ngOnInit(): void {
@@ -44,7 +48,6 @@ export class ReactiveProfile implements OnInit {
     const valid = /^[0-9]{10,15}$/.test(control.value);
     return valid ? null : { invalidPhone: true };
   }
-
   urlValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
     try {
@@ -54,16 +57,18 @@ export class ReactiveProfile implements OnInit {
       return { invalidUrl: true };
     }
   }
-
   alphanumericValidator(control: AbstractControl): ValidationErrors | null {
-    const valid = /^[a-zA-Z0-9]+$/.test(control.value);
+    const valid = /^[a-zA-Z0-9_]+$/.test(control.value);
     return valid ? null : { invalidUsername: true };
   }
-
   get f() {
     return this.profileForm.controls;
   }
-
+  emailNotTakenValidator(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return this.backend.checkEmailNotTaken(control.value).pipe(delay(1000));
+    };
+  }
   onSubmit() {
     if (this.profileForm.valid) {
       this.save.emit(this.profileForm.value);
@@ -74,4 +79,5 @@ export class ReactiveProfile implements OnInit {
   onCancel(): void {
     this.cancel.emit();
   }
+  
 }
