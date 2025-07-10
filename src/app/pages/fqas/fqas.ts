@@ -48,6 +48,9 @@ export class FQAs implements OnInit {
         const val = (e.target as HTMLInputElement).value;
         console.log('Typing question:', val);
       },
+      inputRestrictions: {
+        onlyNumbers: false,
+      },
     },
     {
       FormControlName: 'answer',
@@ -58,7 +61,11 @@ export class FQAs implements OnInit {
       maxLength: 200,
       type: 'text',
       onlyNumbers: true,
+      inputRestrictions:{
+        onlyNumbers: true,
+      }
     },
+  
   ];
   ngOnInit(): void {
     this.faqs = FAQs;

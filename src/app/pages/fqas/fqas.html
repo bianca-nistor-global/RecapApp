@@ -13,7 +13,7 @@
         <app-custom-input 
           *ngFor="let cfg of configList"
           [config]="cfg"
-          [attr.formControlName]="cfg.FormControlName"
+          formControlName="cfg.FormControlName"
         ></app-custom-input>
 
         <button mat-raised-button color="primary" type="submit">Submit</button>

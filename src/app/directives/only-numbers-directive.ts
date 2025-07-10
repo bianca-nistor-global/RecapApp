@@ -1,15 +1,15 @@
 import { Directive, HostListener, Input } from '@angular/core';
+import { InputRestrictions } from '../interface/custom-input-config';
 
 @Directive({
-  selector: '[appOnlyNumbers]', 
+  selector: '[appOnlyNumbers]',
   standalone: false, 
 })
 export class OnlyNumbersDirective {
-  @Input() appOnlyNumbers = true;
-
+  @Input('appOnlyNumbers') inputRestrictions : InputRestrictions ={};
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    if (!this.appOnlyNumbers) return;
+    if (!this.inputRestrictions.onlyNumbers) return;
 
     const allowed = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
     const isCtrl = event.ctrlKey || event.metaKey;
@@ -25,7 +25,7 @@ export class OnlyNumbersDirective {
 
   @HostListener('paste', ['$event'])
   onPaste(event: ClipboardEvent) {
-    if (!this.appOnlyNumbers) return;
+    if (!this.inputRestrictions.onlyNumbers) return;
 
     const pasted = event.clipboardData?.getData('text') ?? '';
     if (!/^\d+$/.test(pasted)) {
@@ -35,7 +35,7 @@ export class OnlyNumbersDirective {
 
   @HostListener('drop', ['$event'])
   onDrop(event: DragEvent) {
-    if (!this.appOnlyNumbers) return;
+    if (!this.inputRestrictions.onlyNumbers) return;
 
     const dropped = event.dataTransfer?.getData('text') ?? '';
     if (!/^\d+$/.test(dropped)) {

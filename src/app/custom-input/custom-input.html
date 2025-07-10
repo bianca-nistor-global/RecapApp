@@ -12,7 +12,7 @@
       (input)="handleInput($event)"
       (blur)="onTouched()"
       [formControlName]="config.FormControlName"
-      [appOnlyNumbers]="config.onlyNumbers ?? false"
+      [appOnlyNumbers]="config.inputRestrictions"
     />
 
     <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>

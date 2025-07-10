@@ -1,3 +1,5 @@
+import { Input } from "@angular/core";
+
 export interface CustomInputConfig {
   FormControlName: string;
   label: string;
@@ -15,5 +17,11 @@ export interface CustomInputConfig {
   multiple?: boolean;
   readonly?: boolean;
   onlyNumbers?: boolean;
+  inputRestrictions: InputRestrictions;
   input?: (event: Event) => void;
+}
+
+export interface InputRestrictions {
+  onlyNumbers?: boolean;
+
 }
