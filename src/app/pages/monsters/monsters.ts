@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MONSTERS} from '../../../public/monsters'
-import { Entry } from '../models/entry.model';
+import {MONSTERS} from '../../../../public/monsters'
+import { Entry } from '../../models/entry.model';
 
 @Component({
   selector: 'app-monsters',

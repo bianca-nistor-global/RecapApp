@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DUNGEONS} from '../../../public/dungeons'
-import { Entry } from '../models/entry.model';
+import {DUNGEONS} from '../../../../public/dungeons'
+import { Entry } from '../../models/entry.model';
 
 @Component({
   selector: 'app-dungeons',

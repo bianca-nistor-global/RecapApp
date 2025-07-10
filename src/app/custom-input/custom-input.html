@@ -1,0 +1,15 @@
+<div class="form-group">
+  <mat-form-field appearance="outline" class="full-width">
+  <input matInput
+    class="form-control"
+    [value]="value"
+    (input)="handleInput($event)"
+    (blur)="onTouched()"
+    [disabled]="disabled"
+    [class.is-invalid]="control?.invalid && control?.touched"
+  />
+
+  <small class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</small>
+</mat-form-field>
+
+</div>

@@ -1,0 +1,53 @@
+<div class="faq-container">
+  <h2>FAQs</h2>
+  <p>
+    Frequently Asked Questions (FAQs) about the Legend of Zelda Compendium. Here
+    you can find answers to common questions about the game, its mechanics, and
+    the lore behind the series.
+  </p>
+
+  <div class="faq-content">
+    <!-- Form -->
+    <div class="faq-form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <app-custom-input
+          formControlName="question"
+          label="Question"
+          placeholder="Ask a question"
+        ></app-custom-input>
+        <app-custom-input
+          formControlName="answer"
+          label="Answer"
+          placeholder="Your answer"
+        ></app-custom-input>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- Preview (styled as existing FAQ) -->
+    <div class="faq-preview">
+      <h3>Preview</h3>
+      <div class="faq-item">
+        <strong class="faq-question">
+          {{ form.value.question || 'Your question will appear here...' }}
+        </strong>
+        <p class="faq-answer">
+          {{ form.value.answer || 'And the answer will appear here.' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Existing FAQs -->
+  <div class="existing-faqs">
+    <h3>Existing FAQs</h3>
+    <ul>
+      <li *ngFor="let faq of faqs">
+        <div class="faq-item">
+          <strong class="faq-question">{{ faq.question }}</strong>
+          <p class="faq-answer">{{ faq.answer }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

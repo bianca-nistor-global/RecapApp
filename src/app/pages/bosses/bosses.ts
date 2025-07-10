@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {BOSSES} from '../../../public/bosses'
-import { Entry } from '../models/entry.model';
+import {BOSSES} from '../../../../public/bosses'
+import { Entry } from '../../models/entry.model';
 
 
 @Component({

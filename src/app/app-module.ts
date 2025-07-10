@@ -11,11 +11,11 @@ import {
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { Characters } from './characters/characters';
-import { Monsters } from './monsters/monsters';
-import { Bosses } from './bosses/bosses';
-import { Dungeons } from './dungeons/dungeons';
-import { Items } from './items/items';
+import { Characters } from './pages/characters/characters';
+import { Monsters } from './pages/monsters/monsters';
+import { Bosses } from './pages/bosses/bosses';
+import { Dungeons } from './pages/dungeons/dungeons';
+import { Items } from './pages/items/items';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,20 +26,23 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Home } from './home/home';
+import { Home } from './pages/home/home';
 import { Entity } from './entity/entity';
-import { Profile } from './profile/profile';
+import { Profile } from './pages/profile/profile';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
+  NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ReactiveProfile } from './reactive-profile/reactive-profile';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateProfile } from './template-profile/template-profile';
+import { CustomInput } from './custom-input/custom-input';
+import { FQAs } from './pages/fqas/fqas';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,8 @@ import { TemplateProfile } from './template-profile/template-profile';
     Profile,
     ReactiveProfile,
     TemplateProfile,
+    CustomInput,
+    FQAs,
   ],
   imports: [
     BrowserModule,
@@ -73,9 +78,11 @@ import { TemplateProfile } from './template-profile/template-profile';
     MatInputModule,
   ],
   providers: [
+
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideClientHydration(withEventReplay()),
+    { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: CustomInput },
   ],
   bootstrap: [App],
 })

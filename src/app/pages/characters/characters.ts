@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Entry } from '../models/entry.model';
-import {CHARACTERS} from '../../../public/characters'
+import { Entry } from '../../models/entry.model';
+import {CHARACTERS} from '../../../../public/characters'
 
 @Component({
   selector: 'app-characters',
