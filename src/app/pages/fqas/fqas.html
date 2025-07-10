@@ -11,15 +11,11 @@
     <div class="faq-form">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <app-custom-input
-          formControlName="question"
-          label="Question"
-          placeholder="Ask a question"
+          *ngFor="let cfg of configList"
+          [config]="cfg"
+          [attr.formControlName]="cfg.FormControlName"
         ></app-custom-input>
-        <app-custom-input
-          formControlName="answer"
-          label="Answer"
-          placeholder="Your answer"
-        ></app-custom-input>
+
         <button mat-raised-button color="primary" type="submit">Submit</button>
       </form>
     </div>
@@ -29,10 +25,10 @@
       <h3>Preview</h3>
       <div class="faq-item">
         <strong class="faq-question">
-          {{ form.value.question || 'Your question will appear here...' }}
+          {{ form.value.question || "Your question will appear here..." }}
         </strong>
         <p class="faq-answer">
-          {{ form.value.answer || 'And the answer will appear here.' }}
+          {{ form.value.answer || "And the answer will appear here." }}
         </p>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ITEMS} from '../../../public/items'
-import { Entry } from '../models/entry.model';
+import { Entry } from '../../models/entry.model';
+import { ITEMS } from '../../../../public/items';
 
 @Component({
   selector: 'app-items',

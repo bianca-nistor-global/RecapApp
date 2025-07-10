@@ -1,15 +1,18 @@
 <div class="form-group">
-  <mat-form-field appearance="outline" class="full-width">
-  <input matInput
-    class="form-control"
-    [value]="value"
-    (input)="handleInput($event)"
-    (blur)="onTouched()"
-    [disabled]="disabled"
-    [class.is-invalid]="control?.invalid && control?.touched"
-  />
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>{{ label }}</mat-label>
 
-  <small class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</small>
-</mat-form-field>
+    <input
+      matInput
+      [type]="type"
+      [placeholder]="placeholder"
+      [value]="value"
+      [disabled]="disabled || config.disabled"
+      [readonly]="config.readonly"
+      (input)="handleInput($event)"
+      (blur)="onTouched()"
+    />
 
+    <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+  </mat-form-field>
 </div>

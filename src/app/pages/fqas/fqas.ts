@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { CustomInputConfig } from '../../interface/custom-input-config';
 
 @Component({
   selector: 'app-fqas',
@@ -15,6 +16,7 @@ import {
 })
 export class FQAs implements OnInit {
   editing: boolean = false;
+
   form!: FormGroup;
   faqs: { question: string; answer: string }[] = [];
   constructor(private fb: FormBuilder) {
@@ -26,20 +28,64 @@ export class FQAs implements OnInit {
       ]),
     });
   }
+
+  inputConfig: Record<string, CustomInputConfig> = {
+    question: {
+      FormControlName: 'question',
+      label: 'Your Question',
+      placeholder: 'Ask something...',
+      required: true,
+      minLength: 5,
+      input: (e: Event) => {
+        const val = (e.target as HTMLInputElement).value;
+        console.log('Typing question:', val);
+      },
+    },
+    answer: {
+      FormControlName: 'answer',
+      label: 'Your Answer',
+      placeholder: 'Type an answer...',
+      required: true,
+      maxLength: 150,
+    },
+  };
+
+  configList: CustomInputConfig[] = [
+    {
+      FormControlName: 'question',
+      label: 'Your Question',
+      placeholder: 'Type your question...',
+      required: true,
+      minLength: 5,
+      type: 'text',
+      input: (e: Event) => {
+        const val = (e.target as HTMLInputElement).value;
+        console.log('Typing question:', val);
+      },
+    },
+    {
+      FormControlName: 'answer',
+      label: 'Your Answer',
+      placeholder: 'Type the answer...',
+      required: true,
+      minLength: 6,
+      maxLength: 200,
+      type: 'text',
+    },
+  ];
   ngOnInit(): void {
     this.faqs = FAQs;
   }
 
   onSubmit() {
-  if (this.form.valid) {
-    const newFaq = this.form.value;
-    this.faqs.unshift(newFaq);
-    console.log('FAQ added:', newFaq);
-    this.form.reset();
-  } else {
-    console.log('Form invalid:', this.form.value);
-    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      const newFaq = this.form.value;
+      this.faqs.unshift(newFaq);
+      console.log('FAQ added:', newFaq);
+      this.form.reset();
+    } else {
+      console.log('Form invalid:', this.form.value);
+      this.form.markAllAsTouched();
+    }
   }
-}
-
 }
