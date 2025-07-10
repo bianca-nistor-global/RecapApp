@@ -7,10 +7,12 @@
       [type]="type"
       [placeholder]="placeholder"
       [value]="value"
-      [disabled]="disabled || config.disabled"
+      [disabled]="config.disabled ?? false"
       [readonly]="config.readonly"
       (input)="handleInput($event)"
       (blur)="onTouched()"
+      [formControlName]="config.FormControlName"
+      [appOnlyNumbers]="config.onlyNumbers ?? false"
     />
 
     <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>

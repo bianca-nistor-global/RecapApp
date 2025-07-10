@@ -6,19 +6,24 @@ import { CustomInputConfig } from '../interface/custom-input-config';
   selector: 'app-custom-input',
   templateUrl: './custom-input.html',
   styleUrls: ['./custom-input.scss'],
-  standalone: false
+  standalone: false,
 })
 export class CustomInput implements ControlValueAccessor {
   @Input() config!: CustomInputConfig;
 
   private innerValue: any = '';
-  disabled = false;
 
   constructor(@Self() @Optional() public control: NgControl) {
     if (this.control) {
       this.control.valueAccessor = this;
     }
   }
+  get disabled(){
+    return this.config?.disabled ?? false;
+  }
+  setDisabledState(isDisabled: boolean): void {
+  this.config.disabled = isDisabled;
+}
 
   get label() {
     return this.config?.label ?? '';
@@ -48,7 +53,7 @@ export class CustomInput implements ControlValueAccessor {
     this.onChange(val);
     this.onTouched();
   }
-
+  
   writeValue(value: any): void {
     this.innerValue = value;
   }
@@ -61,9 +66,7 @@ export class CustomInput implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
+
 
   handleInput(event: Event): void {
     const val = (event.target as HTMLInputElement).value;

@@ -14,5 +14,6 @@ export interface CustomInputConfig {
   options?: { value: string; label: string }[];
   multiple?: boolean;
   readonly?: boolean;
+  onlyNumbers?: boolean;
   input?: (event: Event) => void;
 }

@@ -43,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateProfile } from './template-profile/template-profile';
 import { CustomInput } from './custom-input/custom-input';
 import { FQAs } from './pages/fqas/fqas';
+import { OnlyNumbersDirective } from './directives/only-numbers-directive';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { FQAs } from './pages/fqas/fqas';
     TemplateProfile,
     CustomInput,
     FQAs,
+    OnlyNumbersDirective,
   ],
   imports: [
     BrowserModule,

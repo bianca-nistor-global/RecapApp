@@ -20,35 +20,21 @@ export class FQAs implements OnInit {
   form!: FormGroup;
   faqs: { question: string; answer: string }[] = [];
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      question: new FormControl('', [Validators.required]),
-      answer: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+    this.form = this.fb.group({});
+    this.configList.forEach((cfg) => {
+      const validators = [];
+
+      if (cfg.required) validators.push(Validators.required);
+      if (cfg.minLength) validators.push(Validators.minLength(cfg.minLength));
+      if (cfg.maxLength) validators.push(Validators.maxLength(cfg.maxLength));
+      if (cfg.pattern) validators.push(Validators.pattern(cfg.pattern));
+
+      this.form.addControl(
+        cfg.FormControlName,
+        new FormControl(cfg.value || '', validators)
+      );
     });
   }
-
-  inputConfig: Record<string, CustomInputConfig> = {
-    question: {
-      FormControlName: 'question',
-      label: 'Your Question',
-      placeholder: 'Ask something...',
-      required: true,
-      minLength: 5,
-      input: (e: Event) => {
-        const val = (e.target as HTMLInputElement).value;
-        console.log('Typing question:', val);
-      },
-    },
-    answer: {
-      FormControlName: 'answer',
-      label: 'Your Answer',
-      placeholder: 'Type an answer...',
-      required: true,
-      maxLength: 150,
-    },
-  };
 
   configList: CustomInputConfig[] = [
     {
@@ -71,6 +57,7 @@ export class FQAs implements OnInit {
       minLength: 6,
       maxLength: 200,
       type: 'text',
+      onlyNumbers: true,
     },
   ];
   ngOnInit(): void {

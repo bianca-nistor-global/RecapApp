@@ -10,7 +10,7 @@
     <!-- Form -->
     <div class="faq-form">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <app-custom-input
+        <app-custom-input 
           *ngFor="let cfg of configList"
           [config]="cfg"
           [attr.formControlName]="cfg.FormControlName"
