@@ -10,11 +10,12 @@
     <!-- Form -->
     <div class="faq-form">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <app-custom-input 
-          *ngFor="let cfg of configList"
+        @for (cfg of configList; track $index) {
+        <app-custom-input
           [config]="cfg"
-          formControlName="cfg.FormControlName"
+          [formControlName]="cfg.FormControlName"
         ></app-custom-input>
+        }
 
         <button mat-raised-button color="primary" type="submit">Submit</button>
       </form>

@@ -23,5 +23,8 @@ export interface CustomInputConfig {
 
 export interface InputRestrictions {
   onlyNumbers?: boolean;
-
+  onlyLetters?: boolean;
+  noSpecialChars?: boolean;
+  upperCase?: boolean;
+  lowerCase?: boolean;
 }

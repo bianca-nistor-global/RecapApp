@@ -12,15 +12,47 @@ import { CustomInputConfig } from '../../interface/custom-input-config';
   selector: 'app-fqas',
   standalone: false,
   templateUrl: './fqas.html',
-  styleUrl: './fqas.scss',
+  styleUrls: ['./fqas.scss'], 
 })
 export class FQAs implements OnInit {
   editing: boolean = false;
-
   form!: FormGroup;
   faqs: { question: string; answer: string }[] = [];
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder) {}  
+
+  configList: CustomInputConfig[] = [
+    {
+      FormControlName: 'question',
+      label: 'Your Question',
+      placeholder: 'Type your question...',
+      required: true,
+      minLength: 5,
+      type: 'text',
+      // input: (e: Event) => {
+      //   const val = (e.target as HTMLInputElement).value;
+      //   console.log('Typing question:', val);
+      // },
+      inputRestrictions: {
+      },
+    },
+    {
+      FormControlName: 'answer',
+      label: 'Your Answer',
+      placeholder: 'Type the answer...',
+      required: true,
+      minLength: 6,
+      maxLength: 200,
+      type: 'text',
+      inputRestrictions: {
+        lowerCase: true,
+      },
+    },
+  ];
+
+  ngOnInit(): void {
     this.form = this.fb.group({});
+
     this.configList.forEach((cfg) => {
       const validators = [];
 
@@ -34,40 +66,7 @@ export class FQAs implements OnInit {
         new FormControl(cfg.value || '', validators)
       );
     });
-  }
 
-  configList: CustomInputConfig[] = [
-    {
-      FormControlName: 'question',
-      label: 'Your Question',
-      placeholder: 'Type your question...',
-      required: true,
-      minLength: 5,
-      type: 'text',
-      input: (e: Event) => {
-        const val = (e.target as HTMLInputElement).value;
-        console.log('Typing question:', val);
-      },
-      inputRestrictions: {
-        onlyNumbers: false,
-      },
-    },
-    {
-      FormControlName: 'answer',
-      label: 'Your Answer',
-      placeholder: 'Type the answer...',
-      required: true,
-      minLength: 6,
-      maxLength: 200,
-      type: 'text',
-      onlyNumbers: true,
-      inputRestrictions:{
-        onlyNumbers: true,
-      }
-    },
-  
-  ];
-  ngOnInit(): void {
     this.faqs = FAQs;
   }
 
