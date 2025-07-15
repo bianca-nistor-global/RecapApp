@@ -11,10 +11,10 @@
     <div class="faq-form">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         @for (cfg of configList; track $index) {
-        <app-custom-input
-          [config]="cfg"
-          [formControlName]="cfg.FormControlName"
-        ></app-custom-input>
+          <app-custom-input
+            [config]="cfg"
+            [formControlName]="cfg.FormControlName"
+          ></app-custom-input>
         }
 
         <button mat-raised-button color="primary" type="submit">Submit</button>
@@ -39,12 +39,14 @@
   <div class="existing-faqs">
     <h3>Existing FAQs</h3>
     <ul>
-      <li *ngFor="let faq of faqs">
-        <div class="faq-item">
-          <strong class="faq-question">{{ faq.question }}</strong>
-          <p class="faq-answer">{{ faq.answer }}</p>
-        </div>
-      </li>
+      @for (faq of faqs; track faq) {
+        <li>
+          <div class="faq-item">
+            <strong class="faq-question">{{ faq.question }}</strong>
+            <p class="faq-answer">{{ faq.answer }}</p>
+          </div>
+        </li>
+      }
     </ul>
   </div>
 </div>

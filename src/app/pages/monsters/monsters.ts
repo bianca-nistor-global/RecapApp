@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MONSTERS} from '../../../../public/monsters'
-import { Entry } from '../../models/entry.model';
+import { Entry } from '../../interface/entry.model';
+import { HttpClient } from '@angular/common/http';
+import { ApiLoader } from '../../services/api-loader';
+import { Monsters } from '../../interface/zelda.model';
 
 @Component({
   selector: 'app-monsters',
@@ -8,10 +11,27 @@ import { Entry } from '../../models/entry.model';
   templateUrl: './monsters.html',
   styleUrl: './monsters.scss'
 })
-export class Monsters implements OnInit{
-  monsters : Entry[]=[];
-  ngOnInit(): void {
-    this.monsters=MONSTERS
+export class MonsterComponent implements OnInit{
+  monsters : Monsters[]=[];
+  constructor(
+    private http: HttpClient,
+    private apiLoader: ApiLoader){}
+
+  ngOnInit() {
+    console.log('ApiLoader:', this.apiLoader);
+
+    this.http
+      .get<any>('https://zelda.fanapis.com/api/monsters')
+      .subscribe((response) => {
+        this.monsters = response.data;
+        this.monsters.forEach((monster) => {
+          this.apiLoader.loadFromUrl(monster.appearances).subscribe((games) => {
+            monster.appearanceGames = games.map((g) => g.data);
+            console.log(monster.appearanceGames)
+          });
+          
+        });
+      });
   }
 
 }

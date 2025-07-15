@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileModel } from '../../models/profile.model';
+import { ProfileModel } from '../../interface/profile.model';
 import { PROFILES } from '../../../../public/profiles';
 
 @Component({
@@ -11,7 +11,7 @@ import { PROFILES } from '../../../../public/profiles';
 export class Profile implements OnInit {
   editing: boolean = false;
   hasProfile: boolean = false;
-  formMode: 'none' | 'reactive' | 'template' = 'none';
+  formMode: 'none' | 'reactive' | 'template' | 'custom' = 'none';
 
   profile: ProfileModel = {
     id: 0,
@@ -30,7 +30,7 @@ export class Profile implements OnInit {
     }
   }
 
-  setFormMode(mode: 'reactive' | 'template'): void {
+  setFormMode(mode: 'reactive' | 'template'| 'custom'): void {
     this.formMode = mode;
     this.editing = true;
     localStorage.setItem('lastFormMode', mode);
@@ -41,6 +41,7 @@ export class Profile implements OnInit {
     const lastMode = localStorage.getItem('lastFormMode') as
       | 'template'
       | 'reactive'
+      | 'custom'
     this.formMode = lastMode;
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileModel } from '../../models/profile.model';
+import { ProfileModel } from '../../interface/profile.model';
 import { PROFILES } from '../../../../public/profiles';
 
 @Component({

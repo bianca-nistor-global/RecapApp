@@ -10,7 +10,9 @@
     <button mat-button (click)="setComponent('dungeons')">🏰 Dungeons</button>
     <button mat-button (click)="setComponent('items')">🎒 Items</button>
     <button mat-button (click)="setComponent('monsters')">🐉 Monsters</button>
-    <button mat-button (click)="setComponent('faq')"> FAQs</button>
+    <button mat-button (click)="setComponent('place')">📍 Places</button>
+    <button mat-button (click)="setComponent('maps')">🗺️ Maps</button>
+    <button mat-button (click)="setComponent('faq')">FAQs</button>
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
@@ -20,16 +22,40 @@
       </button>
       <span>Zelda Compendium</span>
     </mat-toolbar>
+    @if (selectedComponent === 'postsAlbums') {
+      <app-social-component
+      ></app-social-component>
+    }
 
-    <app-profile *ngIf="selectedComponent === 'profile'"></app-profile>
-    <app-home *ngIf="selectedComponent === 'home'"></app-home>
-    <app-bosses *ngIf="selectedComponent === 'bosses'"></app-bosses>
-    <app-characters *ngIf="selectedComponent === 'characters'"></app-characters>
-    <app-dungeons *ngIf="selectedComponent === 'dungeons'"></app-dungeons>
-    <app-items *ngIf="selectedComponent === 'items'"></app-items>
-    <app-monsters *ngIf="selectedComponent === 'monsters'"></app-monsters>
-    <app-fqas *ngIf="selectedComponent === 'faq'"></app-fqas>
+    @if (selectedComponent === 'profile') {
+      <app-profile></app-profile>
+    }
+    @if (selectedComponent === 'home') {
+      <app-home></app-home>
+    }
+    @if (selectedComponent === 'bosses') {
+      <app-bosses></app-bosses>
+    }
+    @if (selectedComponent === 'characters') {
+      <app-characters></app-characters>
+    }
+    @if (selectedComponent === 'dungeons') {
+      <app-dungeons></app-dungeons>
+    }
+    @if (selectedComponent === 'items') {
+      <app-items></app-items>
+    }
+    @if (selectedComponent === 'monsters') {
+      <app-monsters></app-monsters>
+    }
+    @if (selectedComponent === 'maps') {
+      <app-maps></app-maps>
+    }
+    @if (selectedComponent === 'faq') {
+      <app-fqas></app-fqas>
+    }
+    @if (selectedComponent === 'place') {
+      <app-places></app-places>
+    }
   </mat-sidenav-content>
-
 </mat-sidenav-container>
-

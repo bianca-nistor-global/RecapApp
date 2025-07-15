@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Entry } from '../../models/entry.model';
-import {CHARACTERS} from '../../../../public/characters'
+import { HttpClient } from '@angular/common/http';
+import { ApiLoader } from '../../services/api-loader';
+import { Char } from '../../interface/zelda.model';
 
 @Component({
   selector: 'app-characters',
@@ -9,8 +10,26 @@ import {CHARACTERS} from '../../../../public/characters'
   styleUrl: './characters.scss'
 })
 export class Characters implements OnInit {
-  characters : Entry[]=[];
-  ngOnInit(): void {
-    this.characters=CHARACTERS;
+  characters : Char[]=[];
+
+  constructor(
+    private http: HttpClient,
+    private apiLoader: ApiLoader){}
+
+  ngOnInit() {
+    console.log('ApiLoader:', this.apiLoader);
+
+    this.http
+      .get<any>('https://zelda.fanapis.com/api/characters')
+      .subscribe((response) => {
+        this.characters = response.data;
+        this.characters.forEach((character) => {
+          this.apiLoader.loadFromUrl(character.appearances).subscribe((games) => {
+            character.appearanceGames = games.map((g) => g.data);
+            console.log(character.appearanceGames)
+          });
+          
+        });
+      });
   }
 }

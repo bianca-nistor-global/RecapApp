@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DUNGEONS} from '../../../../public/dungeons'
-import { Entry } from '../../models/entry.model';
+import { Dungeons } from '../../interface/zelda.model';
+import { HttpClient } from '@angular/common/http';
+import { ApiLoader } from '../../services/api-loader';
 
 @Component({
   selector: 'app-dungeons',
@@ -8,9 +10,26 @@ import { Entry } from '../../models/entry.model';
   templateUrl: './dungeons.html',
   styleUrl: './dungeons.scss'
 })
-export class Dungeons implements OnInit{
-  dungeons : Entry[]=[];
-  ngOnInit(): void {
-    this.dungeons=DUNGEONS;
+export class DungeonsComponent implements OnInit{
+  dungeons : Dungeons[]=[];
+  constructor(
+    private http: HttpClient,
+    private apiLoader: ApiLoader){}
+
+  ngOnInit() {
+    console.log('ApiLoader:', this.apiLoader);
+
+    this.http
+      .get<any>('https://zelda.fanapis.com/api/dungeons')
+      .subscribe((response) => {
+        this.dungeons = response.data;
+        this.dungeons.forEach((dungeon) => {
+          this.apiLoader.loadFromUrl(dungeon.appearances).subscribe((games) => {
+            dungeon.appearanceGames = games.map((g) => g.data);
+            console.log(dungeon.appearanceGames)
+          });
+          
+        });
+      });
   }
 }

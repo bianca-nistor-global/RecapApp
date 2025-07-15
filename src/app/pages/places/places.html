@@ -1,0 +1,22 @@
+@for(x of places; track x.id){
+  <h2>{{ x.name }}</h2>
+  <p>{{ x.description }}</p>
+
+  <h4>Appears in:</h4>
+  <ul>
+    @for (game of x.appearanceGames ?? []; track game) {
+      <li>{{ game.name }}</li>
+    }
+  </ul>
+
+  <h4>Inhabitants:</h4>
+  <ul>
+    @if (!x.inhabitList?.length) {
+      <li>No one</li>
+    }
+    @for (character of x.inhabitList ?? []; track character) {
+      <li>{{ character.name }}</li>
+    }
+  </ul>
+
+}

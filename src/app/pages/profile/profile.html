@@ -1,32 +1,41 @@
 <div class="profile-container">
 
-  <div class="form-mode-buttons" *ngIf="!editing && !hasProfile">
-    <p>Choose how you want to create your profile:</p>
-    <button mat-raised-button color="primary" (click)="setFormMode('template')">
-      <mat-icon>format_align_left</mat-icon> Template Form
-    </button>
-    <button mat-raised-button color="accent" (click)="setFormMode('reactive')">
-      <mat-icon>code</mat-icon> Reactive Form
-    </button>
-  </div>
+  @if (!editing && !hasProfile) {
+    <div class="form-mode-buttons">
+      <p>Choose how you want to create your profile:</p>
+      <button mat-raised-button color="accent" (click)="setFormMode('template')">
+        <mat-icon>format_align_left</mat-icon> Template Form
+      </button>
+      <button mat-raised-button color="primary" (click)="setFormMode('reactive')">
+        <mat-icon>code</mat-icon> Reactive Form
+      </button>
+      <button mat-raised-button color="accent" (click)="setFormMode('custom')">
+        <mat-icon>code</mat-icon> Custom Form
+      </button>
+    </div>
+  }
 
-  <!-- 🧾 Existing Profile Display -->
-  <div class="profile-card" *ngIf="!editing && hasProfile">
-    <h2>{{ profile.username }}</h2>
-    <img
-      *ngIf="profile.imageUrl"
-      [src]="profile.imageUrl"
-      alt="Profile Image"
-      width="150"
-    />
-    <p>Name: {{ profile.firstName }} {{ profile.lastName }}</p>
-    <p>Email: {{ profile.email }}</p>
-    <p *ngIf="profile.phone">Phone: {{ profile.phone }}</p>
-    <button mat-raised-button (click)="startEditing()">
-      <mat-icon>edit</mat-icon>
-      Edit Profile
-    </button>
-  </div>
+  @if (!editing && hasProfile) {
+    <div class="profile-card">
+      <h2>{{ profile.username }}</h2>
+      @if (profile.imageUrl) {
+        <img
+          [src]="profile.imageUrl"
+          alt="Profile Image"
+          width="150"
+          />
+      }
+      <p>Name: {{ profile.firstName }} {{ profile.lastName }}</p>
+      <p>Email: {{ profile.email }}</p>
+      @if (profile.phone) {
+        <p>Phone: {{ profile.phone }}</p>
+      }
+      <button mat-raised-button (click)="startEditing()">
+        <mat-icon>edit</mat-icon>
+        Edit Profile
+      </button>
+    </div>
+  }
 
   <!-- ❌ No Profile Fallback -->
   <ng-template #noProfile>
@@ -34,20 +43,35 @@
     <button mat-raised-button (click)="startEditing()">Create Profile</button>
   </ng-template>
 
-  <div *ngIf="editing && formMode === 'template'">
-    <app-template-profile
-      [profile]="profile"
-      (cancel)="cancelEditing()"
-      (save)="onProfileSaved($event)"
-    ></app-template-profile>
-  </div>
+  @if (editing && formMode === 'template') {
+    <div>
+      <app-template-profile
+        [profile]="profile"
+        (cancel)="cancelEditing()"
+        (save)="onProfileSaved($event)"
+      ></app-template-profile>
+    </div>
+  }
 
-  <div *ngIf="editing && formMode === 'reactive'">
-    <app-reactive-profile
-      [profile]="profile"
-      (cancel)="cancelEditing()"
-      (save)="onProfileSaved($event)"
-    >
-    </app-reactive-profile>
-  </div>
+  @if (editing && formMode === 'reactive') {
+    <div>
+      <app-reactive-profile
+        [profile]="profile"
+        (cancel)="cancelEditing()"
+        (save)="onProfileSaved($event)"
+        >
+      </app-reactive-profile>
+    </div>
+  }
+
+  @if (editing && formMode === 'custom') {
+    <div>
+      <app-custom-profile-form
+        [profile]="profile"
+        (cancel)="cancelEditing()"
+        (save)="onProfileSaved($event)"
+        >
+      </app-custom-profile-form>
+    </div>
+  }
 </div>

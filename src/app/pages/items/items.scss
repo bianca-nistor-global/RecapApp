@@ -1,52 +1,65 @@
 :host {
   display: block;
   padding: 2rem;
+  background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+  color: #f4f4f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 2rem;
+  color: #ffd700; // Triforce gold
+  text-shadow: 1px 1px 2px #000;
+  border-bottom: 2px solid #ffd700;
+  padding-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+h4 {
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  color: #7ec0ee; // Soft blue for section headers
+  border-left: 4px solid #7ec0ee;
+  padding-left: 0.5rem;
+}
+
+ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+li {
+  margin: 0.25rem 0;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #aaa;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left-color: #ffd700;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
 
   h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    text-align: center;
+    font-size: 1.5rem;
   }
-  .category {
-    background-color: #373880;
-  }
-  mat-card {
-    margin: 1.5rem auto;
-    max-width: 600px;
-    border: 1px solid #373880;
-    border-radius: 8px;
-    padding: 1rem;
 
-    mat-card-header {
-      font-size: 1.25rem;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-    }
-
-    mat-card-content {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-
-      p {
-        margin: 0;
-      }
-    }
-
-    mat-card-footer {
-      margin-top: 1rem;
-
-      mat-chip-set {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-
-        mat-chip {
-          font-size: 0.875rem;
-          font-weight: 400;
-        }
-      }
-    }
+  h4 {
+    font-size: 1rem;
   }
 }

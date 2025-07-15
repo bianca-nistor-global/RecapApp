@@ -1,3 +1,22 @@
-<app-entity
-    [entity]="bosses"
-    title="Bosses">
+@for (boss of bosses; track boss) {
+  <div>
+    <h2>{{ boss.name }}</h2>
+    <p>{{ boss.description }}</p>
+    <h4>Appearances in Games</h4>
+    <ul>
+      @for (game of boss.appearanceGames; track game) {
+        <li>
+          {{ game.name }}
+        </li>
+      }
+    </ul>
+    <h4>Related Dungeons</h4>
+    <ul>
+      @for (dungeon of boss.dungeonList; track dungeon) {
+        <li>
+          {{ dungeon.name }}
+        </li>
+      }
+    </ul>
+  </div>
+}

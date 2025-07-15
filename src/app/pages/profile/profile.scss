@@ -1,54 +1,141 @@
+:host {
+  display: block;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+  color: #f4f4f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .profile-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  
+  align-items: center;
+  gap: 2rem;
+}
+
+.form-mode-buttons {
+  text-align: center;
+  background-color: rgba(30, 30, 47, 0.95);
   padding: 2rem;
-  min-height: 100vh;
+  border-radius: 12px;
+  border: 1px solid #444;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
-  h2 {
+  p {
+    font-size: 1.2rem;
     margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  form {
-    width: 200%;
-    max-width: 600px;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  mat-form-field {
-    width: 100%;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px #000;
   }
 
   button {
-    align-self: flex-end;
+    margin: 0.5rem;
+    font-weight: bold;
+
+    mat-icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  button[color='primary'] {
+    background-color: #ffd700;
+    color: #1e1e2f;
+
+    &:hover {
+      background-color: #ffeb3b;
+    }
+  }
+
+  button[color='accent'] {
+    background-color: #7ec0ee;
+    color: #1e1e2f;
+
+    &:hover {
+      background-color: #90d5ff;
+    }
+  }
+}
+
+.profile-card {
+  background-color: rgba(30, 30, 47, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+
+  h2 {
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px #000;
   }
 
   img {
-    width: 150px;
-    height: 150px;
     border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1rem;
+    border: 3px solid #ffd700;
+    margin: 1rem 0;
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #ccc;
+  }
+
+  button {
+    margin-top: 1.5rem;
+    background-color: #ffd700;
+    color: #1e1e2f;
+    font-weight: bold;
+
+    mat-icon {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background-color: #ffeb3b;
+    }
   }
 }
-.profile-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  background-color: #322f2f;
+
+// Embedded form components inherit existing styles
+app-template-profile,
+app-reactive-profile,
+app-custom-profile-form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+// Fallback template styling
+ng-template {
+  p {
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    background-color: #ffd700;
+    color: #1e1e2f;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #ffeb3b;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .form-mode-buttons,
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }

@@ -1,7 +1,6 @@
 import {
   NgModule,
   provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
 } from '@angular/core';
 import {
   BrowserModule,
@@ -12,10 +11,9 @@ import {
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Characters } from './pages/characters/characters';
-import { Monsters } from './pages/monsters/monsters';
-import { Bosses } from './pages/bosses/bosses';
-import { Dungeons } from './pages/dungeons/dungeons';
-import { Items } from './pages/items/items';
+import { MonsterComponent } from './pages/monsters/monsters';
+import { DungeonsComponent } from './pages/dungeons/dungeons';
+import { ItemsComponent } from './pages/items/items';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -44,15 +42,21 @@ import { TemplateProfile } from './template-profile/template-profile';
 import { CustomInput } from './custom-input/custom-input';
 import { FQAs } from './pages/fqas/fqas';
 import { CustomDirective } from './directives/customThingsDirective';
+import { Maps } from './pages/maps/maps';
+import { CustomProfileForm } from './custom-profile-form/custom-profile-form';
+import { provideHttpClient } from '@angular/common/http';
+import { BossesComponent } from './pages/bosses/bosses';
+import { PlacesComponent } from './pages/places/places';
+import { SocialComponent } from './pages/social-component/social-component';
 
 @NgModule({
   declarations: [
     App,
     Characters,
-    Monsters,
-    Bosses,
-    Dungeons,
-    Items,
+    MonsterComponent,
+    BossesComponent,
+    DungeonsComponent,
+    ItemsComponent,
     Home,
     Entity,
     Profile,
@@ -61,6 +65,10 @@ import { CustomDirective } from './directives/customThingsDirective';
     CustomInput,
     FQAs,
     CustomDirective,
+    Maps,
+    CustomProfileForm,
+    PlacesComponent,
+    SocialComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,10 +88,9 @@ import { CustomDirective } from './directives/customThingsDirective';
     MatInputModule,
   ],
   providers: [
-
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
     provideClientHydration(withEventReplay()),
+    provideHttpClient(),
     { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: CustomInput },
   ],
   bootstrap: [App],

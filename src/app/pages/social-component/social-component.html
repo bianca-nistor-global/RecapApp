@@ -1,0 +1,54 @@
+<div class="cp-content">
+  <div class="cp-preview">
+    <h3>Comunity Posts</h3>
+
+    @if (errorMessagePosts) {
+      <p class="cp-error">{{ errorMessagePosts }}</p>
+    }
+
+    <!-- Add New Post -->
+    @if(isPosting){
+      <form (ngSubmit)="addPost()" class="cp-form">
+        <input
+          [(ngModel)]="newPost.title"
+          name="postTitle"
+          placeholder="Post Title"
+          required
+          />
+          <input
+            [(ngModel)]="newPost.body"
+            name="postBody"
+            placeholder="Post Body"
+            required
+            />
+            <button (click)="TogglePost()" type="submit">Add Post</button>
+            <button (click)="TogglePost()" type="cancel">Cancel</button>
+          </form>
+        } @else {
+          <div class="cp-add-wrapper">
+            <button class="cp-add-button" (click)="TogglePost()">Add</button>
+          </div>
+        }
+        <!-- Posts -->
+        @for (post of posts; track post; let i = $index) {
+          <div class="cp-item">
+            @if (post.isEditing) {
+              <div>
+                <input [(ngModel)]="post.editedTitle" name="editTitle{{ i }}" />
+                <textarea
+                  [(ngModel)]="post.editedBody"
+                  name="editBody{{ i }}"
+                ></textarea>
+                <button (click)="saveEdit(post)">Save</button>
+                <button (click)="cancelEdit(post)">Cancel</button>
+              </div>
+            } @else {
+              <strong class="cp-answer">{{ post.title }}</strong>
+              <p class="cp-answer">{{ post.body }}</p>
+              <button (click)="enableEdit(post)">Edit</button>
+              <button (click)="deletePost(i)">Delete</button>
+            }
+          </div>
+        }
+      </div>
+    </div>

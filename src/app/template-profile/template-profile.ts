@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ProfileModel } from '../models/profile.model';
+import { ProfileModel } from '../interface/profile.model';
 
 @Component({
   selector: 'app-template-profile',

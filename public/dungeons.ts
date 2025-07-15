@@ -1,4 +1,4 @@
-import { Entry } from '../src/app/models/entry.model';
+import { Entry } from '../src/app/interface/entry.model';
 
 export const DUNGEONS: Entry[] = [
   {

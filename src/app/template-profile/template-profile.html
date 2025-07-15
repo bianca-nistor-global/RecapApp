@@ -25,39 +25,49 @@
       required
       pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
       #emailInput="ngModel"
-    />
-  </mat-form-field>
+      />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Phone</mat-label>
-    <input
-      matInput
-      type="text"
-      name="phone"
-      [(ngModel)]="profile.phone"
-      pattern="^\+?[0-9]{8,}$"
-      #phoneInput="ngModel"
-    />
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input
+        matInput
+        type="text"
+        name="phone"
+        [(ngModel)]="profile.phone"
+        pattern="^\+?[0-9]{8,}$"
+        #phoneInput="ngModel"
+        />
+      </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Profile Image URL</mat-label>
-    <input matInput type="url" name="imageUrl" [(ngModel)]="profile.imageUrl" />
-  </mat-form-field>
+      <mat-form-field>
+        <mat-label>Profile Image URL</mat-label>
+        <input matInput type="url" name="imageUrl" [(ngModel)]="profile.imageUrl" />
+      </mat-form-field>
 
-  <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">
-    <mat-icon>check_circle</mat-icon> Save
-  </button>
-  <button mat-button type="button" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">
+        <mat-icon>check_circle</mat-icon> Save
+      </button>
+      <button mat-button type="button" (click)="onCancel()">Cancel</button>
 
-  <!-- Validation Messages -->
-  <div *ngIf="emailInput.invalid && emailInput.touched">
-    <small *ngIf="emailInput.errors?.['required']">Email is required.</small>
-    <small *ngIf="emailInput.errors?.['pattern']">Please enter a valid email address.</small>
-  </div>
-  <div *ngIf="phoneInput.invalid">
-    <h3 *ngIf="phoneInput.errors?.['pattern']">
-      Phone number must be at least 8 digits long and can start with a '+'.
-    </h3>
-  </div>
-</form>
+      <!-- Validation Messages -->
+      @if (emailInput.invalid && emailInput.touched) {
+        <div>
+          @if (emailInput.errors?.['required']) {
+            <small>Email is required.</small>
+          }
+          @if (emailInput.errors?.['pattern']) {
+            <small>Please enter a valid email address.</small>
+          }
+        </div>
+      }
+      @if (phoneInput.invalid) {
+        <div>
+          @if (phoneInput.errors?.['pattern']) {
+            <h3>
+              Phone number must be at least 8 digits long and can start with a '+'.
+            </h3>
+          }
+        </div>
+      }
+    </form>

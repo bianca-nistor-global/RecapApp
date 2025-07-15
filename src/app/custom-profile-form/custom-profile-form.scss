@@ -1,0 +1,148 @@
+:host {
+  display: block;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+  color: #f4f4f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cp-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: nowrap; // ⬅️ ensures side-by-side until breakpoint
+}
+
+.cp-form,
+.cp-preview {
+  background-color: rgba(30, 30, 47, 0.95);
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cp-form {
+  flex: 1;
+  max-width: 600px;
+  min-width: 500px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    app-custom-input {
+      display: block;
+    }
+
+    small {
+      color: #ff6666;
+      font-size: 0.85rem;
+    }
+
+    button[type='submit'] {
+      margin-top: 1rem;
+      align-self: flex-start;
+      background-color: #ffd700;
+      color: #1e1e2f;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #ffeb3b;
+      }
+    }
+  }
+}
+
+.cp-preview {
+  flex: 1;
+  max-width: 500px;
+
+  h3 {
+    font-size: 1.5rem;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px #000;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cp-item {
+    .cp-answer {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: #f4f4f9;
+      line-height: 1.5;
+    }
+
+    strong.cp-answer {
+      font-size: 1.2rem;
+      color: #7ec0ee;
+    }
+  }
+
+  .cp-image-preview {
+    margin-top: 1.5rem;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 100%;
+    text-align: center;
+
+    img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+  }
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+
+  button {
+    font-weight: bold;
+    font-size: 1rem;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+    // Force reset inconsistent Material button defaults
+    vertical-align: middle;
+    margin: 0;
+    position: relative;
+    top: 0;
+  }
+
+  button[mat-button] {
+    background-color: transparent;
+    color: #7ec0ee;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  button[mat-raised-button] {
+    background-color: #ffd700;
+    color: #1e1e2f;
+    box-shadow: none;
+
+    &:hover {
+      background-color: #ffeb3b;
+    }
+  }
+}

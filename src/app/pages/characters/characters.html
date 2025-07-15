@@ -1,3 +1,13 @@
-<app-entity
-    [entity]="characters"
-    title="Characters">
+@for(char of characters; track char.id){
+  <h2>{{ char.name }}</h2>
+  <p>{{ char.description }}</p>
+
+  <h4>Appearances in Games</h4>
+  <ul>
+    @for (game of char.appearanceGames; track game) {
+      <li>
+        {{ game.name }}
+      </li>
+    }
+  </ul>
+}

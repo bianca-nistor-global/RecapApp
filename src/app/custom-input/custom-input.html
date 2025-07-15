@@ -11,8 +11,11 @@
       (input)="handleInput($event)"
       (blur)="onTouched()"
       [customRestrictions]="config.inputRestrictions"
-    />
 
-    <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
-  </mat-form-field>
-</div>
+      />
+
+      @if (errorMessage) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
+    </mat-form-field>
+  </div>

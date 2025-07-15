@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Entry } from '../models/entry.model';
+import { Entry } from '../interface/entry.model';
 
 @Component({
   selector: 'app-entity',

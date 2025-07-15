@@ -1,0 +1,60 @@
+<div class="cp-content">
+  <!-- Form -->
+  <div class="cp-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      @for (cfg of configList; track $index) {
+        <app-custom-input
+          [config]="cfg"
+          [formControlName]="cfg.FormControlName"
+        ></app-custom-input>
+        @if (form.get(cfg.FormControlName); as ctrl) {
+          @if (ctrl.invalid && (ctrl.dirty || ctrl.touched)) {
+            <small>
+              @if (ctrl.errors?.['required']) {
+                <span
+                  >{{ cfg.label }} is required.</span
+                  >
+                }
+                @if (ctrl.errors?.['email']) {
+                  <span>Invalid email format.</span>
+                }
+              </small>
+            }
+          }
+        }
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="accent" type="submit" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Preview -->
+    <div class="cp-preview">
+      <h3>Preview</h3>
+      <div class="cp-item">
+        <strong class="cp-answer">
+          {{ form.value.firstName || "Your first name will appear here..." }}
+        </strong>
+        <p class="cp-answer">
+          {{ form.value.lastName || "Your last name will appear here..." }}
+        </p>
+        <p class="cp-answer">
+          {{ form.value.username || "Your username will appear here..." }}
+        </p>
+        <p class="cp-answer">
+          {{ form.value.email || "Your email will appear here..." }}
+        </p>
+        <p class="cp-answer">
+          {{ form.value.phone || "Your phone number will appear here..." }}
+        </p>
+
+        <!-- Image Preview -->
+        @if (form.value.imageUrl) {
+          <div class="cp-image-preview">
+            <img [src]="form.value.imageUrl" alt="Preview image" />
+          </div>
+        }
+      </div>
+    </div>
+  </div>

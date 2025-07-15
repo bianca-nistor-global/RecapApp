@@ -9,7 +9,7 @@ import {
   AsyncValidatorFn,
 } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-import { ProfileModel } from '../models/profile.model';
+import { ProfileModel } from '../interface/profile.model';
 import { debounce, debounceTime, delay, first, of, switchMap } from 'rxjs';
 import { FakeBackend } from '../fake-backend';
 

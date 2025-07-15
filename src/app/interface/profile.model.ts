@@ -7,3 +7,12 @@ export interface ProfileModel {
     imageUrl?: string;
     username: string;
 }
+export interface PostsModel {
+  userid: number;
+  id: number;
+  title: string;
+  body: string;
+  isEditing?: boolean;
+  editedTitle?: string;
+  editedBody?: string;
+}
