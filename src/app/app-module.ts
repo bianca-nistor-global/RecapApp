@@ -44,10 +44,11 @@ import { FQAs } from './pages/fqas/fqas';
 import { CustomDirective } from './directives/customThingsDirective';
 import { Maps } from './pages/maps/maps';
 import { CustomProfileForm } from './custom-profile-form/custom-profile-form';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BossesComponent } from './pages/bosses/bosses';
 import { PlacesComponent } from './pages/places/places';
 import { SocialComponent } from './pages/social-component/social-component';
+import { errorHandlingInterceptor } from './services/error-handling-interceptor-interceptor';
 
 @NgModule({
   declarations: [
@@ -90,8 +91,9 @@ import { SocialComponent } from './pages/social-component/social-component';
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(),
-    { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: CustomInput },
+    provideHttpClient( withInterceptors([errorHandlingInterceptor])),
+    { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: CustomInput ,
+    },
   ],
   bootstrap: [App],
 })

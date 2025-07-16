@@ -19,7 +19,7 @@ export class SocialComponent implements OnInit, OnDestroy {
     userid: 1,
     id: 1,
     title: '',
-    body: ''
+    body: '',
   };
 
   private destroy$ = new Subject<void>();
@@ -37,19 +37,23 @@ export class SocialComponent implements OnInit, OnDestroy {
   addPost() {
     if (!this.newPost.title || !this.newPost.body) return;
 
-    this.api.addPost(this.newPost)
+    this.api
+      .addPost(this.newPost)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (createdPost) => {
-          this.posts.unshift({ ...createdPost, isEditing: false, editedTitle: createdPost.title, editedBody: createdPost.body });
+          this.posts.unshift({
+            ...createdPost,
+            isEditing: false,
+            editedTitle: createdPost.title,
+            editedBody: createdPost.body,
+          });
+
           this.newPost = { userid: 1, id: 1, title: '', body: '' };
-        },
-        error: () => {
-          this.errorMessagePosts = 'Failed to add post';
         },
         complete: () => {
           console.log('Add post request completed');
-        }
+        },
       });
   }
 
@@ -61,10 +65,12 @@ export class SocialComponent implements OnInit, OnDestroy {
     post.isEditing = false;
     post.editedTitle = post.title;
     post.editedBody = post.body;
+    this.errorMessagePosts=''
   }
 
   saveEdit(post: PostsModel) {
-    this.api.editPost(post.id, {
+  this.api
+    .editPost(post.id, {
       userid: post.userid,
       title: post.editedTitle || post.title,
       body: post.editedBody || post.body,
@@ -72,21 +78,28 @@ export class SocialComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (updatedPost) => {
+        if (!updatedPost || !updatedPost.title || !updatedPost.body) {
+          console.error('Edit response is invalid:', updatedPost);
+          this.errorMessagePosts = 'Edit failed: invalid response';
+          this.newPost.body=''
+          this.newPost.title=''
+          return;
+        }
+
         post.title = updatedPost.title;
         post.body = updatedPost.body;
         post.isEditing = false;
       },
-      error: () => {
-        this.errorMessagePosts = 'Failed to edit post';
-      },
       complete: () => {
         console.log('Edit post request completed');
-      }
+      },
     });
-  }
+}
+
 
   loadPosts() {
-    this.api.getPosts()
+    this.api
+      .getPosts()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (posts) => {
@@ -94,35 +107,34 @@ export class SocialComponent implements OnInit, OnDestroy {
             ...post,
             isEditing: false,
             editedTitle: post.title,
-            editedBody: post.body
+            editedBody: post.body,
           }));
+
+          this.posts = this.posts.slice(0, 10);
         },
         error: () => {
           this.errorMessagePosts = 'Failed to load posts';
         },
         complete: () => {
           console.log('Load posts request completed');
-        }
+        },
       });
   }
 
   deletePost(index: number) {
     const post = this.posts[index];
-    this.api.deletePost(post.id)
+    this.api
+      .deletePost(post.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          //this.posts.splice(index, 1);
-          this.posts=this.posts.filter(p=>post.id!==p.id)
-          console.log(post.id)
-          console.log(this.posts)
-        },
-        error: () => {
-          this.errorMessagePosts = 'Failed to delete post';
+          this.posts = this.posts.filter((p) => post.id !== p.id);
+          console.log(post.id);
+          console.log(this.posts);
         },
         complete: () => {
           console.log('Delete post request completed');
-        }
+        },
       });
   }
 

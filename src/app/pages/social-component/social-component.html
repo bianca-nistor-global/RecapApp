@@ -21,7 +21,7 @@
             placeholder="Post Body"
             required
             />
-            <button (click)="TogglePost()" type="submit">Add Post</button>
+            <button (click)="addPost()" (click)="TogglePost()" type="submit">Add Post</button>
             <button (click)="TogglePost()" type="cancel">Cancel</button>
           </form>
         } @else {
