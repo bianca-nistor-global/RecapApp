@@ -13,6 +13,7 @@
     <button mat-button (click)="setComponent('place')">📍 Places</button>
     <button mat-button (click)="setComponent('maps')">🗺️ Maps</button>
     <button mat-button (click)="setComponent('faq')">FAQs</button>
+    <button mat-button (click)="setComponent('cat')"></button>
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
@@ -56,6 +57,9 @@
     }
     @if (selectedComponent === 'place') {
       <app-places></app-places>
+    }
+    @if (selectedComponent === 'cat') {
+      <app-cat-gallery></app-cat-gallery>
     }
   </mat-sidenav-content>
 </mat-sidenav-container>

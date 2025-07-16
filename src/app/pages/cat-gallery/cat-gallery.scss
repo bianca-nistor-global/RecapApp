@@ -1,0 +1,18 @@
+.cat-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+
+  .cat-image-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+    img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+}

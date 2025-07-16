@@ -49,6 +49,8 @@ import { BossesComponent } from './pages/bosses/bosses';
 import { PlacesComponent } from './pages/places/places';
 import { SocialComponent } from './pages/social-component/social-component';
 import { errorHandlingInterceptor } from './services/error-handling-interceptor-interceptor';
+import { authInterceptor } from './services/auth-interceptor';
+import { CatGallery } from './pages/cat-gallery/cat-gallery';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { errorHandlingInterceptor } from './services/error-handling-interceptor-
     CustomProfileForm,
     PlacesComponent,
     SocialComponent,
+    CatGallery,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,7 @@ import { errorHandlingInterceptor } from './services/error-handling-interceptor-
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
-    provideHttpClient( withInterceptors([errorHandlingInterceptor])),
+    provideHttpClient( withInterceptors([errorHandlingInterceptor, authInterceptor])),
     { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: CustomInput ,
     },
   ],
