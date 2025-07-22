@@ -19,7 +19,7 @@ export class PlacesComponent implements OnInit{
     console.log('ApiLoader:', this.apiLoader);
 
     this.http
-      .get<any>('https://zelda.fanapis.com/api/places')
+      .get<any>('/zelda-api/api/places')
       .subscribe((response) => {
         this.places = response.data;
         this.places.forEach((place) => {

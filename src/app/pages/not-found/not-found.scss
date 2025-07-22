@@ -3,12 +3,26 @@
   padding: 2rem;
   background: linear-gradient(135deg, #1e1e2f, #2d2d44);
   color: #f4f4f9;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
   font-size: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   color: #ffd700;
   text-shadow: 1px 1px 2px #000;
   border-bottom: 2px solid #ffd700;
@@ -32,22 +46,24 @@ h4 {
 
 ul {
   list-style: none;
-  padding-left: 1rem;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-button {
+li {
   margin: 0.25rem 0;
   padding: 0.4rem 0.8rem;
   background-color: rgba(255, 255, 255, 0.05);
-  color:#ddd;
   border-left: 3px solid #aaa;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+li:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-left-color: #ffd700;
   cursor: pointer;
 }
-

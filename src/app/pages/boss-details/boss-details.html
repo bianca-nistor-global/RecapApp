@@ -1,0 +1,21 @@
+@if (boss) {
+  <div>
+    <h2>{{ boss.name }}</h2>
+    <p>{{ boss.description }}</p>
+
+    <h4>Appearances in Games</h4>
+    <ul>
+      @for (game of boss.appearanceGames; track game.id) {
+        <li>{{ game.name }}</li>
+      }
+    </ul>
+
+    <h4>Related Dungeons</h4>
+    <ul>
+      @for (dungeon of boss.dungeonList; track dungeon.id) {
+        <li>{{ dungeon.name }}</li>
+      }
+    </ul>
+    <button routerLink="/bosses">Back</button>
+  </div>
+}

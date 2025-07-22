@@ -1,0 +1,15 @@
+{
+  "/zelda-api": {
+    "target":{
+       "host": "https://zelda.fanapis.com",
+       "protocol": "https:",
+       "port": 443
+     },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/zelda-api": ""
+    }
+  }
+}

@@ -1,19 +1,19 @@
+<mat-spinner *ngIf="isLoading | async" class="global-spinner"></mat-spinner>
+
 <mat-sidenav-container class="main-container">
-  <mat-sidenav #sidenav mode="over" opened full>
+  <mat-sidenav #sidenav mode="over" opened>
     <mat-toolbar> Categories </mat-toolbar>
-    <button mat-button (click)="setComponent('profile')">Profile</button>
-    <button mat-button (click)="setComponent('home')">🏠 Home</button>
-    <button mat-button (click)="setComponent('bosses')">👹 Bosses</button>
-    <button mat-button (click)="setComponent('characters')">
-      🧝 Characters
-    </button>
-    <button mat-button (click)="setComponent('dungeons')">🏰 Dungeons</button>
-    <button mat-button (click)="setComponent('items')">🎒 Items</button>
-    <button mat-button (click)="setComponent('monsters')">🐉 Monsters</button>
-    <button mat-button (click)="setComponent('place')">📍 Places</button>
-    <button mat-button (click)="setComponent('maps')">🗺️ Maps</button>
-    <button mat-button (click)="setComponent('faq')">FAQs</button>
-    <button mat-button (click)="setComponent('cat')"></button>
+    <a mat-button routerLink="/profile">Profile</a>
+    <a mat-button routerLink="/home">🏠 Home</a>
+    <!-- <a mat-button routerLink="/bosses">👹 Bosses</a>
+    <a mat-button routerLink="/characters">🧝 Characters</a>
+    <a mat-button routerLink="/dungeons">🏰 Dungeons</a>
+    <a mat-button routerLink="/items">🎒 Items</a>
+    <a mat-button routerLink="/monsters">🐉 Monsters</a>
+    <a mat-button routerLink="/place">📍 Places</a>
+    <a mat-button routerLink="/maps">🗺️ Maps</a> -->
+    <a mat-button routerLink="/faq">FAQs</a>
+    <a mat-button routerLink="/cat"></a>
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
@@ -23,43 +23,7 @@
       </button>
       <span>Zelda Compendium</span>
     </mat-toolbar>
-    @if (selectedComponent === 'postsAlbums') {
-      <app-social-component
-      ></app-social-component>
-    }
 
-    @if (selectedComponent === 'profile') {
-      <app-profile></app-profile>
-    }
-    @if (selectedComponent === 'home') {
-      <app-home></app-home>
-    }
-    @if (selectedComponent === 'bosses') {
-      <app-bosses></app-bosses>
-    }
-    @if (selectedComponent === 'characters') {
-      <app-characters></app-characters>
-    }
-    @if (selectedComponent === 'dungeons') {
-      <app-dungeons></app-dungeons>
-    }
-    @if (selectedComponent === 'items') {
-      <app-items></app-items>
-    }
-    @if (selectedComponent === 'monsters') {
-      <app-monsters></app-monsters>
-    }
-    @if (selectedComponent === 'maps') {
-      <app-maps></app-maps>
-    }
-    @if (selectedComponent === 'faq') {
-      <app-fqas></app-fqas>
-    }
-    @if (selectedComponent === 'place') {
-      <app-places></app-places>
-    }
-    @if (selectedComponent === 'cat') {
-      <app-cat-gallery></app-cat-gallery>
-    }
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

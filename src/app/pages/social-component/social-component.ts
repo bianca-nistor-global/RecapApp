@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiLoader } from '../../services/api-loader';
 import { PostsModel } from '../../interface/profile.model';
@@ -24,7 +24,7 @@ export class SocialComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private api: ApiLoader) {}
+  constructor(private api: ApiLoader, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadPosts();
@@ -50,6 +50,7 @@ export class SocialComponent implements OnInit, OnDestroy {
           });
 
           this.newPost = { userid: 1, id: 1, title: '', body: '' };
+          this.cdr.detectChanges();
         },
         complete: () => {
           console.log('Add post request completed');

@@ -1,0 +1,77 @@
+:host {
+  display: block;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+  color: #f4f4f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ffd700;
+  text-shadow: 1px 1px 2px #000;
+  border-bottom: 2px solid #ffd700;
+  padding-bottom: 0.5rem;
+}
+
+mat-card {
+  background-color: rgba(30, 30, 47, 0.95);
+  border-radius: 12px;
+  border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+
+  mat-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  mat-card-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    color: #ddd;
+
+    strong {
+      color: #7ec0ee;
+    }
+
+    em {
+      font-style: italic;
+      color: #f4f4f9;
+    }
+  }
+
+  mat-card-footer {
+    margin-top: 1.5rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: #ffd700;
+    border-top: 1px solid #555;
+    padding-top: 0.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  mat-card {
+    padding: 1rem;
+  }
+
+  mat-card-title {
+    font-size: 1.3rem;
+  }
+}

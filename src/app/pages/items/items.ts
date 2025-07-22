@@ -21,7 +21,7 @@ export class ItemsComponent implements OnInit {
     console.log('ApiLoader:', this.apiLoader);
 
     this.http
-      .get<any>('https://zelda.fanapis.com/api/items')
+      .get<any>('/zelda-api/api/items')
       .subscribe((response) => {
         this.items = response.data;
         this.items.forEach((item) => {

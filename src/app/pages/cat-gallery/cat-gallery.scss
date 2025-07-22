@@ -2,17 +2,28 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: #f0f0f0;
+}
 
-  .cat-image-container {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+.cat-image-container {
+  border: 6px solid #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: white;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  max-width: 300px;
 
-    img {
-      width: 250px;
-      height: 250px;
-      object-fit: cover;
-    }
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
   }
 }

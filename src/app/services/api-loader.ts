@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, concatMap, from, Observable, of, toArray } from 'rxjs';
 import { PostsModel } from '../interface/profile.model';
+import { SKIP_LOADER } from './skip-loader.token';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,9 @@ export class ApiLoader {
   }
 
   addPost(post: PostsModel): Observable<PostsModel> {
-    return this.http.post<PostsModel>(`${this.baseUrl}/posts`, post);
+    return this.http.post<PostsModel>(`${this.baseUrl}/posts`, post, {
+      context: new HttpContext().set(SKIP_LOADER, true),
+    });
   }
   editPost(
     id: number,
@@ -45,10 +48,12 @@ export class ApiLoader {
       .delete<void>(`${this.baseUrl}/posts/${id}`)
       .pipe(catchError(this.handleError<void>('deletePost')));
   }
-
   loadFromUrl(urls: string[]): Observable<any[]> {
     return from(urls).pipe(
-      concatMap((url: string) => this.http.get<any>(url)),
+      concatMap((url: string) => {
+        const relativePath = url.split('https://zelda.fanapis.com/api/')[1];
+        return this.http.get<any>(`/zelda-api/api/${relativePath}`);
+      }),
       toArray()
     );
   }

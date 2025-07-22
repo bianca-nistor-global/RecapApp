@@ -44,13 +44,18 @@ import { FQAs } from './pages/fqas/fqas';
 import { CustomDirective } from './directives/customThingsDirective';
 import { Maps } from './pages/maps/maps';
 import { CustomProfileForm } from './custom-profile-form/custom-profile-form';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withFetch } from '@angular/common/http';
 import { BossesComponent } from './pages/bosses/bosses';
 import { PlacesComponent } from './pages/places/places';
 import { SocialComponent } from './pages/social-component/social-component';
 import { errorHandlingInterceptor } from './services/error-handling-interceptor-interceptor';
 import { authInterceptor } from './services/auth-interceptor';
 import { CatGallery } from './pages/cat-gallery/cat-gallery';
+import { loadingInterceptorInterceptor } from './services/loading-interceptor-interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NotFound } from './pages/not-found/not-found';
+import { BossDetails } from './pages/boss-details/boss-details';
+import { HomeDetails } from './pages/home/home-details/home-details';
 
 @NgModule({
   declarations: [
@@ -73,6 +78,9 @@ import { CatGallery } from './pages/cat-gallery/cat-gallery';
     PlacesComponent,
     SocialComponent,
     CatGallery,
+    NotFound,
+    BossDetails,
+    HomeDetails,
   ],
   imports: [
     BrowserModule,
@@ -90,11 +98,13 @@ import { CatGallery } from './pages/cat-gallery/cat-gallery';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
-    provideHttpClient( withInterceptors([errorHandlingInterceptor, authInterceptor])),
+    provideHttpClient( withFetch(),withInterceptors([errorHandlingInterceptor, authInterceptor,loadingInterceptorInterceptor])),
     { provide: NG_VALUE_ACCESSOR, multi: true, useExisting: CustomInput ,
     },
   ],

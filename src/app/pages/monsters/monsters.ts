@@ -21,7 +21,7 @@ export class MonsterComponent implements OnInit{
     console.log('ApiLoader:', this.apiLoader);
 
     this.http
-      .get<any>('https://zelda.fanapis.com/api/monsters')
+      .get<any>('/zelda-api/api/monsters')
       .subscribe((response) => {
         this.monsters = response.data;
         this.monsters.forEach((monster) => {

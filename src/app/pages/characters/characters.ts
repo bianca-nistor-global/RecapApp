@@ -20,7 +20,7 @@ export class Characters implements OnInit {
     console.log('ApiLoader:', this.apiLoader);
 
     this.http
-      .get<any>('https://zelda.fanapis.com/api/characters')
+      .get<any>('/zelda-api/api/characters')
       .subscribe((response) => {
         this.characters = response.data;
         this.characters.forEach((character) => {

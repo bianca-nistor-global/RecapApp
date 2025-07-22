@@ -20,7 +20,7 @@ export class DungeonsComponent implements OnInit{
     console.log('ApiLoader:', this.apiLoader);
 
     this.http
-      .get<any>('https://zelda.fanapis.com/api/dungeons')
+      .get<any>('/zelda-api/api/dungeons')
       .subscribe((response) => {
         this.dungeons = response.data;
         this.dungeons.forEach((dungeon) => {

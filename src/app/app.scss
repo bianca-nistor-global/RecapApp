@@ -19,7 +19,7 @@
       text-shadow: 1px 1px 2px #000;
     }
 
-    button[mat-button] {
+    a[mat-button] {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -62,7 +62,6 @@
       }
     }
 
-    // All routed components
     app-home,
     app-bosses,
     app-characters,
@@ -117,8 +116,14 @@
     }
   }
 }
+.global-spinner, .loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
 
-// Responsive for mobile
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
